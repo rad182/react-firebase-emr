@@ -12,6 +12,8 @@ class LoginForm extends PureComponent {
     form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
+        const { onLoginSuccess } = this.props;
+        onLoginSuccess();
       }
     });
   };
@@ -66,9 +68,10 @@ class LoginForm extends PureComponent {
 
 LoginForm.propTypes = {
   form: PropTypes.shape({
-    validateFields: PropTypes.shape().isRequired,
-    getFieldDecorator: PropTypes.shape().isRequired,
+    validateFields: PropTypes.func.isRequired,
+    getFieldDecorator: PropTypes.func.isRequired,
   }).isRequired,
+  onLoginSuccess: PropTypes.func.isRequired,
 };
 
 export default Form.create()(LoginForm);
