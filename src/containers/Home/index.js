@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import PropTypes from 'prop-types';
 import './index.css';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -10,9 +11,19 @@ class Home extends Component {
     collapsed: false,
   };
 
+  static propTypes = {
+    history: PropTypes.shape({}).isRequired,
+  };
+
   onCollapse = collapsed => {
     console.log(collapsed);
     this.setState({ collapsed });
+  };
+
+  handleClick = e => {
+    console.log('click ', e);
+    const { history } = this.props;
+    history.push('/login');
   };
 
   render() {
@@ -21,7 +32,12 @@ class Home extends Component {
       <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
           <div className="logo" />
-          <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+          <Menu
+            theme="dark"
+            defaultSelectedKeys={['1']}
+            mode="inline"
+            onClick={this.handleClick}
+          >
             <Menu.Item key="1">
               <Icon type="pie-chart" />
               <span>Option 1</span>
@@ -56,8 +72,8 @@ class Home extends Component {
               <Menu.Item key="8">Team 2</Menu.Item>
             </SubMenu>
             <Menu.Item key="9">
-              <Icon type="file" />
-              <span>File</span>
+              <Icon type="logout" />
+              <span>Log Out</span>
             </Menu.Item>
           </Menu>
         </Sider>
