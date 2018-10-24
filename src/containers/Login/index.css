@@ -1,0 +1,14 @@
+.login-header {
+  width: '100%';
+}
+
+.login-content {
+  margin: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-footer {
+  text-align: center;
+}
