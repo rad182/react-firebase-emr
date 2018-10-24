@@ -1,0 +1,9 @@
+{
+  "presets": ["airbnb"],
+  "sourceMaps": true,
+  "env": {
+    "production": {
+      "plugins": ["transform-remove-console"]
+    }
+  }
+}
