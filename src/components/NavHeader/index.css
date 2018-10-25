@@ -1,0 +1,57 @@
+.header {
+  height: 64px;
+  padding: 0 1px 0 0;
+  margin: 0;
+  background: white;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  position: relative;
+}
+
+.trigger {
+  font-size: 20px;
+  line-height: 64px;
+  cursor: pointer;
+  transition: all 0.3s, padding 0s;
+  padding: 0 24px;
+}
+
+.trigger:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.right {
+  float: right;
+  background-color: white;
+  height: 100%;
+  padding: 0;
+}
+
+.notification-button {
+  cursor: pointer;
+  display: inline-block;
+  transition: all 0.3s;
+  padding: 0 14px;
+}
+
+.notification-icon {
+  font-size: 18px;
+}
+
+.notification-button:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.account {
+  cursor: pointer;
+  display: inline-block;
+  transition: all 0.3s;
+  padding: 0 14px;
+}
+
+.account:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.avatar {
+  margin-right: 10px;
+}
