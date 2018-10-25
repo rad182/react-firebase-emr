@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import { Layout, Menu, Icon } from 'antd';
+import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Dashboard from './Dashboard';
+import Doctors from './Doctors';
+import Patients from './Patients';
+import Settings from './Settings';
 import './index.css';
 
 const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
 
 class Home extends Component {
   state = {
@@ -13,65 +17,68 @@ class Home extends Component {
 
   static propTypes = {
     history: PropTypes.shape({}).isRequired,
+    location: PropTypes.shape({}).isRequired,
   };
 
   onCollapse = collapsed => {
-    console.log(collapsed);
     this.setState({ collapsed });
   };
 
   handleClick = e => {
-    console.log('click ', e);
     const { history } = this.props;
-    history.push('/login');
+    switch (e.key) {
+      case 'logout':
+        history.push('/login');
+        break;
+      case 'doctors':
+        history.push('/doctors');
+        break;
+      case 'patients':
+        history.push('/patients');
+        break;
+      case 'dashboard':
+        history.push('/');
+        break;
+      case 'settings':
+        history.push('/settings');
+        break;
+      default:
+        break;
+    }
   };
 
   render() {
     const { collapsed } = this.state;
+    const { location } = this.props;
     return (
       <Layout style={{ minHeight: '100vh' }}>
         <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
           <div className="logo" />
           <Menu
             theme="dark"
-            defaultSelectedKeys={['1']}
+            defaultSelectedKeys={[
+              location.pathname.replace('/', '') || 'dashboard',
+            ]}
             mode="inline"
             onClick={this.handleClick}
           >
-            <Menu.Item key="1">
-              <Icon type="pie-chart" />
-              <span>Option 1</span>
+            <Menu.Item key="dashboard">
+              <Icon type="dashboard" />
+              <span>Dashboard</span>
             </Menu.Item>
-            <Menu.Item key="2">
-              <Icon type="desktop" />
-              <span>Option 2</span>
+            <Menu.Item key="patients">
+              <Icon type="team" />
+              <span>Patients</span>
             </Menu.Item>
-            <SubMenu
-              key="sub1"
-              title={
-                <span>
-                  <Icon type="user" />
-                  <span>User</span>
-                </span>
-              }
-            >
-              <Menu.Item key="3">Tom</Menu.Item>
-              <Menu.Item key="4">Bill</Menu.Item>
-              <Menu.Item key="5">Alex</Menu.Item>
-            </SubMenu>
-            <SubMenu
-              key="sub2"
-              title={
-                <span>
-                  <Icon type="team" />
-                  <span>Team</span>
-                </span>
-              }
-            >
-              <Menu.Item key="6">Team 1</Menu.Item>
-              <Menu.Item key="8">Team 2</Menu.Item>
-            </SubMenu>
-            <Menu.Item key="9">
+            <Menu.Item key="doctors">
+              <Icon type="medicine-box" />
+              <span>Doctors</span>
+            </Menu.Item>
+            <Menu.Item key="settings">
+              <Icon type="setting" />
+              <span>Settings</span>
+            </Menu.Item>
+            <Menu.Item key="logout">
               <Icon type="logout" />
               <span>Log Out</span>
             </Menu.Item>
@@ -80,13 +87,10 @@ class Home extends Component {
         <Layout>
           <Header style={{ background: '#fff', padding: 0 }} />
           <Content style={{ margin: '0 16px' }}>
-            <Breadcrumb style={{ margin: '16px 0' }}>
-              <Breadcrumb.Item>User</Breadcrumb.Item>
-              <Breadcrumb.Item>Bill</Breadcrumb.Item>
-            </Breadcrumb>
-            <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
-              Bill is a cat.
-            </div>
+            <Route exact path="/" component={Dashboard} />
+            <Route exact path="/doctors" component={Doctors} />
+            <Route exact path="/patients" component={Patients} />
+            <Route exact path="/settings" component={Settings} />
           </Content>
           <Footer style={{ textAlign: 'center' }}>
             Ant Design ©2018 Created by Ant UED
