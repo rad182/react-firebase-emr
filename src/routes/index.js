@@ -4,6 +4,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from '../containers/Login';
 import Home from '../containers/Home';
 import NotFound from '../containers/NotFound';
+import RequireAuth from '../components/RequireAuth';
+
+const AuthHome = RequireAuth(Home);
 
 const Routes = () => (
   <Router>
@@ -16,7 +19,7 @@ const Routes = () => (
           return location.state && location.state.is404 ? (
             <NotFound />
           ) : (
-            <Home {...props} />
+            <AuthHome {...props} />
           );
         }}
       />

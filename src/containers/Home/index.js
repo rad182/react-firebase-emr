@@ -7,6 +7,7 @@ import Doctors from './Doctors';
 import Patients from './Patients';
 import Settings from './Settings';
 import RedirectAs404 from '../../components/RedirectAs404';
+import firebase from '../../lib/firebase';
 import './index.css';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -29,7 +30,8 @@ class Home extends Component {
     const { history } = this.props;
     switch (e.key) {
       case 'logout':
-        history.push('/login');
+        // sign out from firebase
+        firebase.auth().signOut();
         break;
       case 'doctors':
         history.push('/doctors');
