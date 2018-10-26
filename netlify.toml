@@ -2,3 +2,14 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+[[headers]]
+  # Define which paths this specific [[headers]] block will cover.
+  for = "/*"
+
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    Strict-Transport-Security = "max-age=15552000"
+    X-Content-Type-Options = "nosniff"
+    Content-Security-Policy = "default-src 'self'"
