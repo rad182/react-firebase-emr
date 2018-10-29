@@ -12,4 +12,4 @@
     X-XSS-Protection = "1; mode=block"
     Strict-Transport-Security = "max-age=15552000"
     X-Content-Type-Options = "nosniff"
-    Content-Security-Policy = "default-src 'self'"
+    Content-Security-Policy = "style-src 'unsafe-inline' 'self'; default-src 'self'"
